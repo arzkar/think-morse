@@ -16,8 +16,6 @@
 
 use std::env;
 use std::io;
-use std::io::prelude::*;
-use std::fs::OpenOptions;
 use std::process;
 use std::process::Command;
 use std::{thread, time};
