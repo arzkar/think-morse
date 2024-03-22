@@ -18,12 +18,12 @@ Download the binary from releases
 
 ## Crate
 ```
-sudo think-morse "hello world"
+think-morse "hello world"
 ```
   
 
 ## Binary
 
 ```
-sudo .\think-morse "hello world"
+.\think-morse "hello world"
 ```

@@ -10,7 +10,7 @@ checksum = "007df9e3d40e94fa47ebcd566cea59858474021445690672ef64fefce8892b5c"
 
 [[package]]
 name = "think-morse"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "morse",
 ]

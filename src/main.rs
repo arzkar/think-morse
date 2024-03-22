@@ -19,6 +19,7 @@ use std::io;
 use std::io::prelude::*;
 use std::fs::OpenOptions;
 use std::process;
+use std::process::Command;
 use std::{thread, time};
 use morse::encode;
 
@@ -34,13 +35,20 @@ const LOOP_GAP: time::Duration = time::Duration::from_millis(15 * MULTIPLIER);
 const THINKPAD_LID_LOGO_LED: &str = "/sys/class/leds/tpacpi::lid_logo_dot/brightness";
 
 fn led(state: bool) -> io::Result<()> {
-    let mut f = OpenOptions::new().write(true).open(THINKPAD_LID_LOGO_LED)?;
     let value = if state { "255" } else { "0" };
-    f.write_all(value.as_bytes())?;
-    f.flush()?;
+    let output = Command::new("sudo")
+        .arg("sh")
+        .arg("-c")
+        .arg(format!("echo {} > {}", value, THINKPAD_LID_LOGO_LED))
+        .output()?;
+    
+    if !output.status.success() {
+        let stderr = String::from_utf8_lossy(&output.stderr);
+        return Err(io::Error::new(io::ErrorKind::Other, stderr.to_string()));
+    }
+
     Ok(())
 }
-
 fn encode_morse(input: &str) -> io::Result<String> {
     match encode::encode(input) {
         Ok(morse) => Ok(morse),

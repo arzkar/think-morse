@@ -1,6 +1,6 @@
 [package]
 name = "think-morse"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = ["Arbaaz Laskar <arzkar.dev@gmail.com>"]
 description = "A CLI to flash morse code using the thinkpad's lid logo led, only works in Linux."
